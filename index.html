@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1" />
+  <title>Range Trainer</title>
+  <meta name="description" content="Log club-by-club swing quality on the driving range and track your stats over time." />
+
+  <meta name="theme-color" content="#16281F" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Range Trainer" />
+
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/png" sizes="64x64" href="icons/favicon.png" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #0F1E17;
+      min-height: 100vh;
+      overscroll-behavior-y: contain;
+    }
+    #root {
+      min-height: 100vh;
+    }
+    /* shown only until React mounts, or if JS fails entirely */
+    #boot-fallback {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #A9B7AC;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 14px;
+      padding: 24px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="root">
+    <div id="boot-fallback">Loading Range Trainer…</div>
+  </div>
+
+  <!-- React 18 UMD (pinned — React 19 dropped UMD builds) -->
+  <script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+
+  <script src="app.js"></script>
+
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("service-worker.js").catch(() => {
+          // offline caching just won't be available — the app still works online
+        });
+      });
+    }
+  </script>
+</body>
+</html>
